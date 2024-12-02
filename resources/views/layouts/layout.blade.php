@@ -136,9 +136,21 @@
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Admin
+                    @auth
+                        <div class="small">Logged in as:</div>
+                        {{ Auth::user()->name }}
+                        
+                        <form action="{{ route('logout') }}" method="POST"  style="margin-top: 10px;  padding:0;">
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+                        </form>
+                        
+                    @else
+                        <div class="small">You are not logged in.</div>
+                        <a href="{{ route('login') }}" class="btn btn-primary btn-sm mt-2">Login</a>
+                    @endauth
                 </div>
+                
             </nav>
         </div>
         <div id="layoutSidenav_content">
